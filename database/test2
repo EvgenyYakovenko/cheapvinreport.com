@@ -1,0 +1,738 @@
+--
+-- File generated with SQLiteStudio v3.4.17 on œr. sty 14 21:04:29 2026
+--
+-- Text encoding used: System
+--
+PRAGMA foreign_keys = off;
+BEGIN TRANSACTION;
+
+-- Table: cache
+CREATE TABLE IF NOT EXISTS cache (
+    key        VARCHAR NOT NULL,
+    value      TEXT    NOT NULL,
+    expiration INTEGER NOT NULL,
+    PRIMARY KEY (
+        key
+    )
+);
+
+
+-- Table: cache_locks
+CREATE TABLE IF NOT EXISTS cache_locks (
+    key        VARCHAR NOT NULL,
+    owner      VARCHAR NOT NULL,
+    expiration INTEGER NOT NULL,
+    PRIMARY KEY (
+        key
+    )
+);
+
+
+-- Table: categories
+CREATE TABLE IF NOT EXISTS categories (
+    id               INTEGER  PRIMARY KEY AUTOINCREMENT
+                              NOT NULL,
+    name             VARCHAR  NOT NULL,
+    slug             VARCHAR  NOT NULL,
+    meta_title       VARCHAR,
+    meta_description TEXT,
+    meta_keywords    TEXT,
+    translations     TEXT,
+    created_at       DATETIME,
+    updated_at       DATETIME
+);
+
+
+-- Table: category_post
+CREATE TABLE IF NOT EXISTS category_post (
+    id          INTEGER  PRIMARY KEY AUTOINCREMENT
+                         NOT NULL,
+    category_id INTEGER  NOT NULL,
+    post_id     INTEGER  NOT NULL,
+    created_at  DATETIME,
+    updated_at  DATETIME,
+    FOREIGN KEY (
+        category_id
+    )
+    REFERENCES categories (id) ON DELETE CASCADE,
+    FOREIGN KEY (
+        post_id
+    )
+    REFERENCES posts (id) ON DELETE CASCADE
+);
+
+
+-- Table: failed_jobs
+CREATE TABLE IF NOT EXISTS failed_jobs (
+    id         INTEGER  PRIMARY KEY AUTOINCREMENT
+                        NOT NULL,
+    uuid       VARCHAR  NOT NULL,
+    connection TEXT     NOT NULL,
+    queue      TEXT     NOT NULL,
+    payload    TEXT     NOT NULL,
+    exception  TEXT     NOT NULL,
+    failed_at  DATETIME NOT NULL
+                        DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- Table: job_batches
+CREATE TABLE IF NOT EXISTS job_batches (
+    id             VARCHAR NOT NULL,
+    name           VARCHAR NOT NULL,
+    total_jobs     INTEGER NOT NULL,
+    pending_jobs   INTEGER NOT NULL,
+    failed_jobs    INTEGER NOT NULL,
+    failed_job_ids TEXT    NOT NULL,
+    options        TEXT,
+    cancelled_at   INTEGER,
+    created_at     INTEGER NOT NULL,
+    finished_at    INTEGER,
+    PRIMARY KEY (
+        id
+    )
+);
+
+
+-- Table: jobs
+CREATE TABLE IF NOT EXISTS jobs (
+    id           INTEGER PRIMARY KEY AUTOINCREMENT
+                         NOT NULL,
+    queue        VARCHAR NOT NULL,
+    payload      TEXT    NOT NULL,
+    attempts     INTEGER NOT NULL,
+    reserved_at  INTEGER,
+    available_at INTEGER NOT NULL,
+    created_at   INTEGER NOT NULL
+);
+
+
+-- Table: migrations
+CREATE TABLE IF NOT EXISTS migrations (
+    id        INTEGER PRIMARY KEY AUTOINCREMENT
+                      NOT NULL,
+    migration VARCHAR NOT NULL,
+    batch     INTEGER NOT NULL
+);
+
+INSERT INTO migrations (
+                           id,
+                           migration,
+                           batch
+                       )
+                       VALUES (
+                           1,
+                           '0001_01_01_000000_create_users_table',
+                           1
+                       );
+
+INSERT INTO migrations (
+                           id,
+                           migration,
+                           batch
+                       )
+                       VALUES (
+                           2,
+                           '0001_01_01_000001_create_cache_table',
+                           1
+                       );
+
+INSERT INTO migrations (
+                           id,
+                           migration,
+                           batch
+                       )
+                       VALUES (
+                           3,
+                           '0001_01_01_000002_create_jobs_table',
+                           1
+                       );
+
+INSERT INTO migrations (
+                           id,
+                           migration,
+                           batch
+                       )
+                       VALUES (
+                           4,
+                           '2025_11_27_101042_create_orders_table',
+                           1
+                       );
+
+INSERT INTO migrations (
+                           id,
+                           migration,
+                           batch
+                       )
+                       VALUES (
+                           5,
+                           '2025_12_12_133154_create_posts_table',
+                           1
+                       );
+
+INSERT INTO migrations (
+                           id,
+                           migration,
+                           batch
+                       )
+                       VALUES (
+                           6,
+                           '2025_12_12_140155_create_categories_table',
+                           1
+                       );
+
+INSERT INTO migrations (
+                           id,
+                           migration,
+                           batch
+                       )
+                       VALUES (
+                           7,
+                           '2025_12_12_140440_create_category_post_table',
+                           1
+                       );
+
+INSERT INTO migrations (
+                           id,
+                           migration,
+                           batch
+                       )
+                       VALUES (
+                           8,
+                           '2025_12_17_111933_settings',
+                           1
+                       );
+
+
+-- Table: orders
+CREATE TABLE IF NOT EXISTS orders (
+    id             INTEGER  PRIMARY KEY AUTOINCREMENT
+                            NOT NULL,
+    orderReference VARCHAR,
+    invoice_id     VARCHAR,
+    email          VARCHAR,
+    vin            VARCHAR,
+    report_type    VARCHAR,
+    report_key     VARCHAR,
+    currency       VARCHAR,
+    locale         VARCHAR,
+    signature      VARCHAR,
+    status         VARCHAR  CHECK (status IN ('pending payment', 'paid', 'processing', 'completed', 'failed', 'refund', 'expired', 'fraud') ) 
+                            NOT NULL
+                            DEFAULT 'pending payment',
+    reason         VARCHAR,
+    reasonCode     VARCHAR,
+    ip_address     VARCHAR,
+    user_agent     VARCHAR,
+    total_price    NUMERIC,
+    order_purpose  VARCHAR  CHECK (order_purpose IN ('report', 'topup_balance', 'topup_report_balance') ),
+    report_to_add  INTEGER  NOT NULL
+                            DEFAULT '0',
+    user_id        INTEGER,
+    created_at     DATETIME,
+    updated_at     DATETIME,
+    payment_method VARCHAR,
+    payment_data   TEXT,
+    FOREIGN KEY (
+        user_id
+    )
+    REFERENCES users (id) ON DELETE SET NULL
+);
+
+
+-- Table: password_reset_tokens
+CREATE TABLE IF NOT EXISTS password_reset_tokens (
+    email      VARCHAR  NOT NULL,
+    token      VARCHAR  NOT NULL,
+    created_at DATETIME,
+    PRIMARY KEY (
+        email
+    )
+);
+
+
+-- Table: posts
+CREATE TABLE IF NOT EXISTS posts (
+    id               INTEGER  PRIMARY KEY AUTOINCREMENT
+                              NOT NULL,
+    title            VARCHAR  NOT NULL,
+    content          TEXT     NOT NULL,
+    thumbnail        VARCHAR,
+    slug             VARCHAR  NOT NULL,
+    meta_title       VARCHAR,
+    meta_description TEXT,
+    meta_keywords    TEXT,
+    status           VARCHAR  CHECK (status IN ('draft', 'published', 'archived') ) 
+                              NOT NULL
+                              DEFAULT 'published',
+    translations     TEXT,
+    created_at       DATETIME,
+    updated_at       DATETIME
+);
+
+
+-- Table: sessions
+CREATE TABLE IF NOT EXISTS sessions (
+    id            VARCHAR NOT NULL,
+    user_id       INTEGER,
+    ip_address    VARCHAR,
+    user_agent    TEXT,
+    payload       TEXT    NOT NULL,
+    last_activity INTEGER NOT NULL,
+    PRIMARY KEY (
+        id
+    )
+);
+
+
+-- Table: settings
+CREATE TABLE IF NOT EXISTS settings (
+    id         INTEGER  PRIMARY KEY AUTOINCREMENT
+                        NOT NULL,
+    key        VARCHAR  NOT NULL,
+    value      TEXT,
+    created_at DATETIME,
+    updated_at DATETIME
+);
+
+INSERT INTO settings (
+                         id,
+                         key,
+                         value,
+                         created_at,
+                         updated_at
+                     )
+                     VALUES (
+                         1,
+                         'default_currency',
+                         'usd',
+                         '2026-01-14 20:02:24',
+                         '2026-01-14 20:02:24'
+                     );
+
+INSERT INTO settings (
+                         id,
+                         key,
+                         value,
+                         created_at,
+                         updated_at
+                     )
+                     VALUES (
+                         2,
+                         'carfax_price',
+                         '{"usd": 10, "uah": 300, "pln": 40, "kzt": 400}',
+                         '2026-01-14 20:02:24',
+                         '2026-01-14 20:02:24'
+                     );
+
+INSERT INTO settings (
+                         id,
+                         key,
+                         value,
+                         created_at,
+                         updated_at
+                     )
+                     VALUES (
+                         3,
+                         'autocheck_price',
+                         '{"usd": 10, "uah": 300, "pln": 40, "kzt": 400}',
+                         '2026-01-14 20:02:25',
+                         '2026-01-14 20:02:25'
+                     );
+
+INSERT INTO settings (
+                         id,
+                         key,
+                         value,
+                         created_at,
+                         updated_at
+                     )
+                     VALUES (
+                         4,
+                         'auctions_price',
+                         '{"usd": 10, "uah": 300, "pln": 40, "kzt": 400}',
+                         '2026-01-14 20:02:25',
+                         '2026-01-14 20:02:25'
+                     );
+
+INSERT INTO settings (
+                         id,
+                         key,
+                         value,
+                         created_at,
+                         updated_at
+                     )
+                     VALUES (
+                         5,
+                         'sticker_price',
+                         '{"usd": 10, "uah": 300, "pln": 40, "kzt": 400}',
+                         '2026-01-14 20:02:25',
+                         '2026-01-14 20:02:25'
+                     );
+
+INSERT INTO settings (
+                         id,
+                         key,
+                         value,
+                         created_at,
+                         updated_at
+                     )
+                     VALUES (
+                         6,
+                         'topup_report_balance_price',
+                         '{"1-10": {"usd": 10, "uah": 300, "pln": 40, "kzt": 400}, "11-20": {"usd": 9, "uah": 290, "pln": 39, "kzt": 390}}',
+                         '2026-01-14 20:02:25',
+                         '2026-01-14 20:02:25'
+                     );
+
+INSERT INTO settings (
+                         id,
+                         key,
+                         value,
+                         created_at,
+                         updated_at
+                     )
+                     VALUES (
+                         7,
+                         'currency_mapping',
+                         '{"en": "usd", "uk": "uah", "pl": "pln", "ru": "usd", "kk": "kzt"}',
+                         '2026-01-14 20:02:25',
+                         '2026-01-14 20:02:25'
+                     );
+
+
+-- Table: users
+CREATE TABLE IF NOT EXISTS users (
+    id                INTEGER  PRIMARY KEY AUTOINCREMENT
+                               NOT NULL,
+    name              VARCHAR  NOT NULL,
+    email             VARCHAR  NOT NULL,
+    email_verified_at DATETIME,
+    role              VARCHAR  NOT NULL
+                               DEFAULT 'user',
+    balance           FLOAT    NOT NULL
+                               DEFAULT '0',
+    report_balance    INTEGER  NOT NULL
+                               DEFAULT '0',
+    password          VARCHAR  NOT NULL,
+    remember_token    VARCHAR,
+    created_at        DATETIME,
+    updated_at        DATETIME
+);
+
+INSERT INTO users (
+                      id,
+                      name,
+                      email,
+                      email_verified_at,
+                      role,
+                      balance,
+                      report_balance,
+                      password,
+                      remember_token,
+                      created_at,
+                      updated_at
+                  )
+                  VALUES (
+                      1,
+                      'K Admin',
+                      'felixkerser@gmail.com',
+                      '2026-01-14 20:02:24',
+                      'admin',
+                      0.0,
+                      0,
+                      '$2y$12$oujOjRabor/bTJKWKFle.u7rYW4WrH38EJ/4VQwVbcFd2dYO0K8cC',
+                      'SSQPEtQe0R',
+                      '2026-01-14 20:02:24',
+                      '2026-01-14 20:02:24'
+                  );
+
+INSERT INTO users (
+                      id,
+                      name,
+                      email,
+                      email_verified_at,
+                      role,
+                      balance,
+                      report_balance,
+                      password,
+                      remember_token,
+                      created_at,
+                      updated_at
+                  )
+                  VALUES (
+                      2,
+                      'A Admin',
+                      'artem@vinlookup.co',
+                      '2026-01-14 20:02:24',
+                      'admin',
+                      0.0,
+                      0,
+                      '$2y$12$aU7wUbSOkTzi6c.mXlf6W.BHERsV/4LpV3JPshn3ZTuWbCmuM/Sgm',
+                      'ROPM1wdlds',
+                      '2026-01-14 20:02:24',
+                      '2026-01-14 20:02:24'
+                  );
+
+
+-- Index: categories_created_at_index
+CREATE INDEX IF NOT EXISTS categories_created_at_index ON categories (
+    "created_at"
+);
+
+
+-- Index: categories_name_index
+CREATE INDEX IF NOT EXISTS categories_name_index ON categories (
+    "name"
+);
+
+
+-- Index: categories_slug_index
+CREATE INDEX IF NOT EXISTS categories_slug_index ON categories (
+    "slug"
+);
+
+
+-- Index: categories_slug_unique
+CREATE UNIQUE INDEX IF NOT EXISTS categories_slug_unique ON categories (
+    "slug"
+);
+
+
+-- Index: category_post_category_id_index
+CREATE INDEX IF NOT EXISTS category_post_category_id_index ON category_post (
+    "category_id"
+);
+
+
+-- Index: category_post_category_id_post_id_unique
+CREATE UNIQUE INDEX IF NOT EXISTS category_post_category_id_post_id_unique ON category_post (
+    "category_id",
+    "post_id"
+);
+
+
+-- Index: category_post_post_id_index
+CREATE INDEX IF NOT EXISTS category_post_post_id_index ON category_post (
+    "post_id"
+);
+
+
+-- Index: failed_jobs_uuid_unique
+CREATE UNIQUE INDEX IF NOT EXISTS failed_jobs_uuid_unique ON failed_jobs (
+    "uuid"
+);
+
+
+-- Index: jobs_queue_index
+CREATE INDEX IF NOT EXISTS jobs_queue_index ON jobs (
+    "queue"
+);
+
+
+-- Index: orders_created_at_index
+CREATE INDEX IF NOT EXISTS orders_created_at_index ON orders (
+    "created_at"
+);
+
+
+-- Index: orders_email_index
+CREATE INDEX IF NOT EXISTS orders_email_index ON orders (
+    "email"
+);
+
+
+-- Index: orders_invoice_id_index
+CREATE INDEX IF NOT EXISTS orders_invoice_id_index ON orders (
+    "invoice_id"
+);
+
+
+-- Index: orders_ip_address_index
+CREATE INDEX IF NOT EXISTS orders_ip_address_index ON orders (
+    "ip_address"
+);
+
+
+-- Index: orders_order_purpose_index
+CREATE INDEX IF NOT EXISTS orders_order_purpose_index ON orders (
+    "order_purpose"
+);
+
+
+-- Index: orders_orderreference_index
+CREATE INDEX IF NOT EXISTS orders_orderreference_index ON orders (
+    "orderReference"
+);
+
+
+-- Index: orders_payment_method_index
+CREATE INDEX IF NOT EXISTS orders_payment_method_index ON orders (
+    "payment_method"
+);
+
+
+-- Index: orders_reason_index
+CREATE INDEX IF NOT EXISTS orders_reason_index ON orders (
+    "reason"
+);
+
+
+-- Index: orders_reasoncode_index
+CREATE INDEX IF NOT EXISTS orders_reasoncode_index ON orders (
+    "reasonCode"
+);
+
+
+-- Index: orders_signature_index
+CREATE INDEX IF NOT EXISTS orders_signature_index ON orders (
+    "signature"
+);
+
+
+-- Index: orders_status_index
+CREATE INDEX IF NOT EXISTS orders_status_index ON orders (
+    "status"
+);
+
+
+-- Index: orders_total_price_index
+CREATE INDEX IF NOT EXISTS orders_total_price_index ON orders (
+    "total_price"
+);
+
+
+-- Index: orders_updated_at_index
+CREATE INDEX IF NOT EXISTS orders_updated_at_index ON orders (
+    "updated_at"
+);
+
+
+-- Index: orders_user_agent_index
+CREATE INDEX IF NOT EXISTS orders_user_agent_index ON orders (
+    "user_agent"
+);
+
+
+-- Index: orders_user_id_index
+CREATE INDEX IF NOT EXISTS orders_user_id_index ON orders (
+    "user_id"
+);
+
+
+-- Index: orders_vin_index
+CREATE INDEX IF NOT EXISTS orders_vin_index ON orders (
+    "vin"
+);
+
+
+-- Index: posts_created_at_index
+CREATE INDEX IF NOT EXISTS posts_created_at_index ON posts (
+    "created_at"
+);
+
+
+-- Index: posts_slug_index
+CREATE INDEX IF NOT EXISTS posts_slug_index ON posts (
+    "slug"
+);
+
+
+-- Index: posts_slug_unique
+CREATE UNIQUE INDEX IF NOT EXISTS posts_slug_unique ON posts (
+    "slug"
+);
+
+
+-- Index: posts_status_index
+CREATE INDEX IF NOT EXISTS posts_status_index ON posts (
+    "status"
+);
+
+
+-- Index: posts_title_index
+CREATE INDEX IF NOT EXISTS posts_title_index ON posts (
+    "title"
+);
+
+
+-- Index: sessions_last_activity_index
+CREATE INDEX IF NOT EXISTS sessions_last_activity_index ON sessions (
+    "last_activity"
+);
+
+
+-- Index: sessions_user_id_index
+CREATE INDEX IF NOT EXISTS sessions_user_id_index ON sessions (
+    "user_id"
+);
+
+
+-- Index: settings_created_at_index
+CREATE INDEX IF NOT EXISTS settings_created_at_index ON settings (
+    "created_at"
+);
+
+
+-- Index: settings_key_index
+CREATE INDEX IF NOT EXISTS settings_key_index ON settings (
+    "key"
+);
+
+
+-- Index: settings_key_unique
+CREATE UNIQUE INDEX IF NOT EXISTS settings_key_unique ON settings (
+    "key"
+);
+
+
+-- Index: settings_updated_at_index
+CREATE INDEX IF NOT EXISTS settings_updated_at_index ON settings (
+    "updated_at"
+);
+
+
+-- Index: users_created_at_index
+CREATE INDEX IF NOT EXISTS users_created_at_index ON users (
+    "created_at"
+);
+
+
+-- Index: users_email_index
+CREATE INDEX IF NOT EXISTS users_email_index ON users (
+    "email"
+);
+
+
+-- Index: users_email_unique
+CREATE UNIQUE INDEX IF NOT EXISTS users_email_unique ON users (
+    "email"
+);
+
+
+-- Index: users_name_index
+CREATE INDEX IF NOT EXISTS users_name_index ON users (
+    "name"
+);
+
+
+-- Index: users_report_balance_index
+CREATE INDEX IF NOT EXISTS users_report_balance_index ON users (
+    "report_balance"
+);
+
+
+-- Index: users_role_index
+CREATE INDEX IF NOT EXISTS users_role_index ON users (
+    "role"
+);
+
+
+-- Index: users_updated_at_index
+CREATE INDEX IF NOT EXISTS users_updated_at_index ON users (
+    "updated_at"
+);
+
+
+COMMIT TRANSACTION;
+PRAGMA foreign_keys = on;

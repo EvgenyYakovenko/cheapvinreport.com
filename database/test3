@@ -1,0 +1,1360 @@
+<?xml version="1.0" encoding="System"?>
+<database>
+    <name>database4</name>
+    <table>
+        <database></database>
+        <name>cache</name>
+        <ddl><![CDATA[CREATE TABLE "cache" ("key" varchar not null, "value" text not null, "expiration" integer not null, primary key ("key"))]]></ddl>
+        <columns>
+            <column>
+                <name>key</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>value</name>
+                <type>text</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>expiration</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+        </columns>
+        <constraints>
+            <constraint>
+                <type>PRIMARY KEY</type>
+                <definition>primary key (&quot;key&quot;)</definition>
+            </constraint>
+        </constraints>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>cache_locks</name>
+        <ddl><![CDATA[CREATE TABLE "cache_locks" ("key" varchar not null, "owner" varchar not null, "expiration" integer not null, primary key ("key"))]]></ddl>
+        <columns>
+            <column>
+                <name>key</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>owner</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>expiration</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+        </columns>
+        <constraints>
+            <constraint>
+                <type>PRIMARY KEY</type>
+                <definition>primary key (&quot;key&quot;)</definition>
+            </constraint>
+        </constraints>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>categories</name>
+        <ddl><![CDATA[CREATE TABLE "categories" ("id" integer primary key autoincrement not null, "name" varchar not null, "slug" varchar not null, "meta_title" varchar, "meta_description" text, "meta_keywords" text, "translations" text, "created_at" datetime, "updated_at" datetime)]]></ddl>
+        <columns>
+            <column>
+                <name>id</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>PRIMARY KEY</type>
+                        <definition>primary key autoincrement </definition>
+                    </constraint>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>name</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>slug</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>meta_title</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>meta_description</name>
+                <type>text</type>
+            </column>
+            <column>
+                <name>meta_keywords</name>
+                <type>text</type>
+            </column>
+            <column>
+                <name>translations</name>
+                <type>text</type>
+            </column>
+            <column>
+                <name>created_at</name>
+                <type>datetime</type>
+            </column>
+            <column>
+                <name>updated_at</name>
+                <type>datetime</type>
+            </column>
+        </columns>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>category_post</name>
+        <ddl><![CDATA[CREATE TABLE "category_post" ("id" integer primary key autoincrement not null, "category_id" integer not null, "post_id" integer not null, "created_at" datetime, "updated_at" datetime, foreign key("category_id") references "categories"("id") on delete cascade, foreign key("post_id") references "posts"("id") on delete cascade)]]></ddl>
+        <columns>
+            <column>
+                <name>id</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>PRIMARY KEY</type>
+                        <definition>primary key autoincrement </definition>
+                    </constraint>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>category_id</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>post_id</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>created_at</name>
+                <type>datetime</type>
+            </column>
+            <column>
+                <name>updated_at</name>
+                <type>datetime</type>
+            </column>
+        </columns>
+        <constraints>
+            <constraint>
+                <type>FOREIGN KEY</type>
+                <definition>foreign key(&quot;category_id&quot;) references &quot;categories&quot;(&quot;id&quot;) on delete cascade</definition>
+            </constraint>
+            <constraint>
+                <type>FOREIGN KEY</type>
+                <definition>foreign key(&quot;post_id&quot;) references &quot;posts&quot;(&quot;id&quot;) on delete cascade</definition>
+            </constraint>
+        </constraints>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>failed_jobs</name>
+        <ddl><![CDATA[CREATE TABLE "failed_jobs" ("id" integer primary key autoincrement not null, "uuid" varchar not null, "connection" text not null, "queue" text not null, "payload" text not null, "exception" text not null, "failed_at" datetime not null default CURRENT_TIMESTAMP)]]></ddl>
+        <columns>
+            <column>
+                <name>id</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>PRIMARY KEY</type>
+                        <definition>primary key autoincrement </definition>
+                    </constraint>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>uuid</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>connection</name>
+                <type>text</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>queue</name>
+                <type>text</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>payload</name>
+                <type>text</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>exception</name>
+                <type>text</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>failed_at</name>
+                <type>datetime</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null </definition>
+                    </constraint>
+                    <constraint>
+                        <type>DEFAULT</type>
+                        <definition>default CURRENT_TIMESTAMP</definition>
+                    </constraint>
+                </constraints>
+            </column>
+        </columns>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>job_batches</name>
+        <ddl><![CDATA[CREATE TABLE "job_batches" ("id" varchar not null, "name" varchar not null, "total_jobs" integer not null, "pending_jobs" integer not null, "failed_jobs" integer not null, "failed_job_ids" text not null, "options" text, "cancelled_at" integer, "created_at" integer not null, "finished_at" integer, primary key ("id"))]]></ddl>
+        <columns>
+            <column>
+                <name>id</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>name</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>total_jobs</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>pending_jobs</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>failed_jobs</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>failed_job_ids</name>
+                <type>text</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>options</name>
+                <type>text</type>
+            </column>
+            <column>
+                <name>cancelled_at</name>
+                <type>integer</type>
+            </column>
+            <column>
+                <name>created_at</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>finished_at</name>
+                <type>integer</type>
+            </column>
+        </columns>
+        <constraints>
+            <constraint>
+                <type>PRIMARY KEY</type>
+                <definition>primary key (&quot;id&quot;)</definition>
+            </constraint>
+        </constraints>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>jobs</name>
+        <ddl><![CDATA[CREATE TABLE "jobs" ("id" integer primary key autoincrement not null, "queue" varchar not null, "payload" text not null, "attempts" integer not null, "reserved_at" integer, "available_at" integer not null, "created_at" integer not null)]]></ddl>
+        <columns>
+            <column>
+                <name>id</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>PRIMARY KEY</type>
+                        <definition>primary key autoincrement </definition>
+                    </constraint>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>queue</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>payload</name>
+                <type>text</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>attempts</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>reserved_at</name>
+                <type>integer</type>
+            </column>
+            <column>
+                <name>available_at</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>created_at</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+        </columns>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>migrations</name>
+        <ddl><![CDATA[CREATE TABLE "migrations" ("id" integer primary key autoincrement not null, "migration" varchar not null, "batch" integer not null)]]></ddl>
+        <columns>
+            <column>
+                <name>id</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>PRIMARY KEY</type>
+                        <definition>primary key autoincrement </definition>
+                    </constraint>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>migration</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>batch</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+        </columns>
+        <rows>
+            <row>
+                <value column="0">1</value>
+                <value column="1">0001_01_01_000000_create_users_table</value>
+                <value column="2">1</value>
+            </row>
+            <row>
+                <value column="0">2</value>
+                <value column="1">0001_01_01_000001_create_cache_table</value>
+                <value column="2">1</value>
+            </row>
+            <row>
+                <value column="0">3</value>
+                <value column="1">0001_01_01_000002_create_jobs_table</value>
+                <value column="2">1</value>
+            </row>
+            <row>
+                <value column="0">4</value>
+                <value column="1">2025_11_27_101042_create_orders_table</value>
+                <value column="2">1</value>
+            </row>
+            <row>
+                <value column="0">5</value>
+                <value column="1">2025_12_12_133154_create_posts_table</value>
+                <value column="2">1</value>
+            </row>
+            <row>
+                <value column="0">6</value>
+                <value column="1">2025_12_12_140155_create_categories_table</value>
+                <value column="2">1</value>
+            </row>
+            <row>
+                <value column="0">7</value>
+                <value column="1">2025_12_12_140440_create_category_post_table</value>
+                <value column="2">1</value>
+            </row>
+            <row>
+                <value column="0">8</value>
+                <value column="1">2025_12_17_111933_settings</value>
+                <value column="2">1</value>
+            </row>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>orders</name>
+        <ddl><![CDATA[CREATE TABLE "orders" ("id" integer primary key autoincrement not null, "orderReference" varchar, "invoice_id" varchar, "email" varchar, "vin" varchar, "report_type" varchar, "report_key" varchar, "currency" varchar, "locale" varchar, "signature" varchar, "status" varchar check ("status" in ('pending payment', 'paid', 'processing', 'completed', 'failed', 'refund', 'expired', 'fraud')) not null default 'pending payment', "reason" varchar, "reasonCode" varchar, "ip_address" varchar, "user_agent" varchar, "total_price" numeric, "order_purpose" varchar check ("order_purpose" in ('report', 'topup_balance', 'topup_report_balance')), "report_to_add" integer not null default '0', "user_id" integer, "created_at" datetime, "updated_at" datetime, "payment_method" varchar, "payment_data" text, foreign key("user_id") references "users"("id") on delete set null)]]></ddl>
+        <columns>
+            <column>
+                <name>id</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>PRIMARY KEY</type>
+                        <definition>primary key autoincrement </definition>
+                    </constraint>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>orderReference</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>invoice_id</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>email</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>vin</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>report_type</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>report_key</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>currency</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>locale</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>signature</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>status</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>CHECK</type>
+                        <definition><![CDATA[check ("status" in ('pending payment', 'paid', 'processing', 'completed', 'failed', 'refund', 'expired', 'fraud')) ]]></definition>
+                    </constraint>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null </definition>
+                    </constraint>
+                    <constraint>
+                        <type>DEFAULT</type>
+                        <definition>default 'pending payment'</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>reason</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>reasonCode</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>ip_address</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>user_agent</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>total_price</name>
+                <type>numeric</type>
+            </column>
+            <column>
+                <name>order_purpose</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>CHECK</type>
+                        <definition>check (&quot;order_purpose&quot; in ('report', 'topup_balance', 'topup_report_balance'))</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>report_to_add</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null </definition>
+                    </constraint>
+                    <constraint>
+                        <type>DEFAULT</type>
+                        <definition>default '0'</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>user_id</name>
+                <type>integer</type>
+            </column>
+            <column>
+                <name>created_at</name>
+                <type>datetime</type>
+            </column>
+            <column>
+                <name>updated_at</name>
+                <type>datetime</type>
+            </column>
+            <column>
+                <name>payment_method</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>payment_data</name>
+                <type>text</type>
+            </column>
+        </columns>
+        <constraints>
+            <constraint>
+                <type>FOREIGN KEY</type>
+                <definition>foreign key(&quot;user_id&quot;) references &quot;users&quot;(&quot;id&quot;) on delete set null</definition>
+            </constraint>
+        </constraints>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>password_reset_tokens</name>
+        <ddl><![CDATA[CREATE TABLE "password_reset_tokens" ("email" varchar not null, "token" varchar not null, "created_at" datetime, primary key ("email"))]]></ddl>
+        <columns>
+            <column>
+                <name>email</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>token</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>created_at</name>
+                <type>datetime</type>
+            </column>
+        </columns>
+        <constraints>
+            <constraint>
+                <type>PRIMARY KEY</type>
+                <definition>primary key (&quot;email&quot;)</definition>
+            </constraint>
+        </constraints>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>posts</name>
+        <ddl><![CDATA[CREATE TABLE "posts" ("id" integer primary key autoincrement not null, "title" varchar not null, "content" text not null, "thumbnail" varchar, "slug" varchar not null, "meta_title" varchar, "meta_description" text, "meta_keywords" text, "status" varchar check ("status" in ('draft', 'published', 'archived')) not null default 'published', "translations" text, "created_at" datetime, "updated_at" datetime)]]></ddl>
+        <columns>
+            <column>
+                <name>id</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>PRIMARY KEY</type>
+                        <definition>primary key autoincrement </definition>
+                    </constraint>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>title</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>content</name>
+                <type>text</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>thumbnail</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>slug</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>meta_title</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>meta_description</name>
+                <type>text</type>
+            </column>
+            <column>
+                <name>meta_keywords</name>
+                <type>text</type>
+            </column>
+            <column>
+                <name>status</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>CHECK</type>
+                        <definition>check (&quot;status&quot; in ('draft', 'published', 'archived')) </definition>
+                    </constraint>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null </definition>
+                    </constraint>
+                    <constraint>
+                        <type>DEFAULT</type>
+                        <definition>default 'published'</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>translations</name>
+                <type>text</type>
+            </column>
+            <column>
+                <name>created_at</name>
+                <type>datetime</type>
+            </column>
+            <column>
+                <name>updated_at</name>
+                <type>datetime</type>
+            </column>
+        </columns>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>sessions</name>
+        <ddl><![CDATA[CREATE TABLE "sessions" ("id" varchar not null, "user_id" integer, "ip_address" varchar, "user_agent" text, "payload" text not null, "last_activity" integer not null, primary key ("id"))]]></ddl>
+        <columns>
+            <column>
+                <name>id</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>user_id</name>
+                <type>integer</type>
+            </column>
+            <column>
+                <name>ip_address</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>user_agent</name>
+                <type>text</type>
+            </column>
+            <column>
+                <name>payload</name>
+                <type>text</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>last_activity</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+        </columns>
+        <constraints>
+            <constraint>
+                <type>PRIMARY KEY</type>
+                <definition>primary key (&quot;id&quot;)</definition>
+            </constraint>
+        </constraints>
+        <rows>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>settings</name>
+        <ddl><![CDATA[CREATE TABLE "settings" ("id" integer primary key autoincrement not null, "key" varchar not null, "value" text, "created_at" datetime, "updated_at" datetime)]]></ddl>
+        <columns>
+            <column>
+                <name>id</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>PRIMARY KEY</type>
+                        <definition>primary key autoincrement </definition>
+                    </constraint>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>key</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>value</name>
+                <type>text</type>
+            </column>
+            <column>
+                <name>created_at</name>
+                <type>datetime</type>
+            </column>
+            <column>
+                <name>updated_at</name>
+                <type>datetime</type>
+            </column>
+        </columns>
+        <rows>
+            <row>
+                <value column="0">1</value>
+                <value column="1">default_currency</value>
+                <value column="2">usd</value>
+                <value column="3">2026-01-14 20:02:24</value>
+                <value column="4">2026-01-14 20:02:24</value>
+            </row>
+            <row>
+                <value column="0">2</value>
+                <value column="1">carfax_price</value>
+                <value column="2">{&quot;usd&quot;: 10, &quot;uah&quot;: 300, &quot;pln&quot;: 40, &quot;kzt&quot;: 400}</value>
+                <value column="3">2026-01-14 20:02:24</value>
+                <value column="4">2026-01-14 20:02:24</value>
+            </row>
+            <row>
+                <value column="0">3</value>
+                <value column="1">autocheck_price</value>
+                <value column="2">{&quot;usd&quot;: 10, &quot;uah&quot;: 300, &quot;pln&quot;: 40, &quot;kzt&quot;: 400}</value>
+                <value column="3">2026-01-14 20:02:25</value>
+                <value column="4">2026-01-14 20:02:25</value>
+            </row>
+            <row>
+                <value column="0">4</value>
+                <value column="1">auctions_price</value>
+                <value column="2">{&quot;usd&quot;: 10, &quot;uah&quot;: 300, &quot;pln&quot;: 40, &quot;kzt&quot;: 400}</value>
+                <value column="3">2026-01-14 20:02:25</value>
+                <value column="4">2026-01-14 20:02:25</value>
+            </row>
+            <row>
+                <value column="0">5</value>
+                <value column="1">sticker_price</value>
+                <value column="2">{&quot;usd&quot;: 10, &quot;uah&quot;: 300, &quot;pln&quot;: 40, &quot;kzt&quot;: 400}</value>
+                <value column="3">2026-01-14 20:02:25</value>
+                <value column="4">2026-01-14 20:02:25</value>
+            </row>
+            <row>
+                <value column="0">6</value>
+                <value column="1">topup_report_balance_price</value>
+                <value column="2"><![CDATA[{"1-10": {"usd": 10, "uah": 300, "pln": 40, "kzt": 400}, "11-20": {"usd": 9, "uah": 290, "pln": 39, "kzt": 390}}]]></value>
+                <value column="3">2026-01-14 20:02:25</value>
+                <value column="4">2026-01-14 20:02:25</value>
+            </row>
+            <row>
+                <value column="0">7</value>
+                <value column="1">currency_mapping</value>
+                <value column="2">{&quot;en&quot;: &quot;usd&quot;, &quot;uk&quot;: &quot;uah&quot;, &quot;pl&quot;: &quot;pln&quot;, &quot;ru&quot;: &quot;usd&quot;, &quot;kk&quot;: &quot;kzt&quot;}</value>
+                <value column="3">2026-01-14 20:02:25</value>
+                <value column="4">2026-01-14 20:02:25</value>
+            </row>
+        </rows>
+    </table>
+    <table>
+        <database></database>
+        <name>users</name>
+        <ddl><![CDATA[CREATE TABLE "users" ("id" integer primary key autoincrement not null, "name" varchar not null, "email" varchar not null, "email_verified_at" datetime, "role" varchar not null default 'user', "balance" float not null default '0', "report_balance" integer not null default '0', "password" varchar not null, "remember_token" varchar, "created_at" datetime, "updated_at" datetime)]]></ddl>
+        <columns>
+            <column>
+                <name>id</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>PRIMARY KEY</type>
+                        <definition>primary key autoincrement </definition>
+                    </constraint>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>name</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>email</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>email_verified_at</name>
+                <type>datetime</type>
+            </column>
+            <column>
+                <name>role</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null </definition>
+                    </constraint>
+                    <constraint>
+                        <type>DEFAULT</type>
+                        <definition>default 'user'</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>balance</name>
+                <type>float</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null </definition>
+                    </constraint>
+                    <constraint>
+                        <type>DEFAULT</type>
+                        <definition>default '0'</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>report_balance</name>
+                <type>integer</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null </definition>
+                    </constraint>
+                    <constraint>
+                        <type>DEFAULT</type>
+                        <definition>default '0'</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>password</name>
+                <type>varchar</type>
+                <constraints>
+                    <constraint>
+                        <type>NOT NULL</type>
+                        <definition>not null</definition>
+                    </constraint>
+                </constraints>
+            </column>
+            <column>
+                <name>remember_token</name>
+                <type>varchar</type>
+            </column>
+            <column>
+                <name>created_at</name>
+                <type>datetime</type>
+            </column>
+            <column>
+                <name>updated_at</name>
+                <type>datetime</type>
+            </column>
+        </columns>
+        <rows>
+            <row>
+                <value column="0">1</value>
+                <value column="1">K Admin</value>
+                <value column="2">felixkerser@gmail.com</value>
+                <value column="3">2026-01-14 20:02:24</value>
+                <value column="4">admin</value>
+                <value column="5">0</value>
+                <value column="6">0</value>
+                <value column="7">$2y$12$oujOjRabor/bTJKWKFle.u7rYW4WrH38EJ/4VQwVbcFd2dYO0K8cC</value>
+                <value column="8">SSQPEtQe0R</value>
+                <value column="9">2026-01-14 20:02:24</value>
+                <value column="10">2026-01-14 20:02:24</value>
+            </row>
+            <row>
+                <value column="0">2</value>
+                <value column="1">A Admin</value>
+                <value column="2">artem@vinlookup.co</value>
+                <value column="3">2026-01-14 20:02:24</value>
+                <value column="4">admin</value>
+                <value column="5">0</value>
+                <value column="6">0</value>
+                <value column="7">$2y$12$aU7wUbSOkTzi6c.mXlf6W.BHERsV/4LpV3JPshn3ZTuWbCmuM/Sgm</value>
+                <value column="8">ROPM1wdlds</value>
+                <value column="9">2026-01-14 20:02:24</value>
+                <value column="10">2026-01-14 20:02:24</value>
+            </row>
+        </rows>
+    </table>
+    <index>
+        <database></database>
+        <name>categories_created_at_index</name>
+        <ddl>CREATE INDEX &quot;categories_created_at_index&quot; on &quot;categories&quot; (&quot;created_at&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>categories_name_index</name>
+        <ddl>CREATE INDEX &quot;categories_name_index&quot; on &quot;categories&quot; (&quot;name&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>categories_slug_index</name>
+        <ddl>CREATE INDEX &quot;categories_slug_index&quot; on &quot;categories&quot; (&quot;slug&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>categories_slug_unique</name>
+        <unique>true</unique>
+        <ddl>CREATE UNIQUE INDEX &quot;categories_slug_unique&quot; on &quot;categories&quot; (&quot;slug&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>category_post_category_id_index</name>
+        <ddl>CREATE INDEX &quot;category_post_category_id_index&quot; on &quot;category_post&quot; (&quot;category_id&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>category_post_category_id_post_id_unique</name>
+        <unique>true</unique>
+        <ddl><![CDATA[CREATE UNIQUE INDEX "category_post_category_id_post_id_unique" on "category_post" ("category_id", "post_id")]]></ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>category_post_post_id_index</name>
+        <ddl>CREATE INDEX &quot;category_post_post_id_index&quot; on &quot;category_post&quot; (&quot;post_id&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>failed_jobs_uuid_unique</name>
+        <unique>true</unique>
+        <ddl>CREATE UNIQUE INDEX &quot;failed_jobs_uuid_unique&quot; on &quot;failed_jobs&quot; (&quot;uuid&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>jobs_queue_index</name>
+        <ddl>CREATE INDEX &quot;jobs_queue_index&quot; on &quot;jobs&quot; (&quot;queue&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_created_at_index</name>
+        <ddl>CREATE INDEX &quot;orders_created_at_index&quot; on &quot;orders&quot; (&quot;created_at&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_email_index</name>
+        <ddl>CREATE INDEX &quot;orders_email_index&quot; on &quot;orders&quot; (&quot;email&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_invoice_id_index</name>
+        <ddl>CREATE INDEX &quot;orders_invoice_id_index&quot; on &quot;orders&quot; (&quot;invoice_id&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_ip_address_index</name>
+        <ddl>CREATE INDEX &quot;orders_ip_address_index&quot; on &quot;orders&quot; (&quot;ip_address&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_order_purpose_index</name>
+        <ddl>CREATE INDEX &quot;orders_order_purpose_index&quot; on &quot;orders&quot; (&quot;order_purpose&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_orderreference_index</name>
+        <ddl>CREATE INDEX &quot;orders_orderreference_index&quot; on &quot;orders&quot; (&quot;orderReference&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_payment_method_index</name>
+        <ddl>CREATE INDEX &quot;orders_payment_method_index&quot; on &quot;orders&quot; (&quot;payment_method&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_reason_index</name>
+        <ddl>CREATE INDEX &quot;orders_reason_index&quot; on &quot;orders&quot; (&quot;reason&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_reasoncode_index</name>
+        <ddl>CREATE INDEX &quot;orders_reasoncode_index&quot; on &quot;orders&quot; (&quot;reasonCode&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_signature_index</name>
+        <ddl>CREATE INDEX &quot;orders_signature_index&quot; on &quot;orders&quot; (&quot;signature&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_status_index</name>
+        <ddl>CREATE INDEX &quot;orders_status_index&quot; on &quot;orders&quot; (&quot;status&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_total_price_index</name>
+        <ddl>CREATE INDEX &quot;orders_total_price_index&quot; on &quot;orders&quot; (&quot;total_price&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_updated_at_index</name>
+        <ddl>CREATE INDEX &quot;orders_updated_at_index&quot; on &quot;orders&quot; (&quot;updated_at&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_user_agent_index</name>
+        <ddl>CREATE INDEX &quot;orders_user_agent_index&quot; on &quot;orders&quot; (&quot;user_agent&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_user_id_index</name>
+        <ddl>CREATE INDEX &quot;orders_user_id_index&quot; on &quot;orders&quot; (&quot;user_id&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>orders_vin_index</name>
+        <ddl>CREATE INDEX &quot;orders_vin_index&quot; on &quot;orders&quot; (&quot;vin&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>posts_created_at_index</name>
+        <ddl>CREATE INDEX &quot;posts_created_at_index&quot; on &quot;posts&quot; (&quot;created_at&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>posts_slug_index</name>
+        <ddl>CREATE INDEX &quot;posts_slug_index&quot; on &quot;posts&quot; (&quot;slug&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>posts_slug_unique</name>
+        <unique>true</unique>
+        <ddl>CREATE UNIQUE INDEX &quot;posts_slug_unique&quot; on &quot;posts&quot; (&quot;slug&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>posts_status_index</name>
+        <ddl>CREATE INDEX &quot;posts_status_index&quot; on &quot;posts&quot; (&quot;status&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>posts_title_index</name>
+        <ddl>CREATE INDEX &quot;posts_title_index&quot; on &quot;posts&quot; (&quot;title&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>sessions_last_activity_index</name>
+        <ddl>CREATE INDEX &quot;sessions_last_activity_index&quot; on &quot;sessions&quot; (&quot;last_activity&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>sessions_user_id_index</name>
+        <ddl>CREATE INDEX &quot;sessions_user_id_index&quot; on &quot;sessions&quot; (&quot;user_id&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>settings_created_at_index</name>
+        <ddl>CREATE INDEX &quot;settings_created_at_index&quot; on &quot;settings&quot; (&quot;created_at&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>settings_key_index</name>
+        <ddl>CREATE INDEX &quot;settings_key_index&quot; on &quot;settings&quot; (&quot;key&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>settings_key_unique</name>
+        <unique>true</unique>
+        <ddl>CREATE UNIQUE INDEX &quot;settings_key_unique&quot; on &quot;settings&quot; (&quot;key&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>settings_updated_at_index</name>
+        <ddl>CREATE INDEX &quot;settings_updated_at_index&quot; on &quot;settings&quot; (&quot;updated_at&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>users_created_at_index</name>
+        <ddl>CREATE INDEX &quot;users_created_at_index&quot; on &quot;users&quot; (&quot;created_at&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>users_email_index</name>
+        <ddl>CREATE INDEX &quot;users_email_index&quot; on &quot;users&quot; (&quot;email&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>users_email_unique</name>
+        <unique>true</unique>
+        <ddl>CREATE UNIQUE INDEX &quot;users_email_unique&quot; on &quot;users&quot; (&quot;email&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>users_name_index</name>
+        <ddl>CREATE INDEX &quot;users_name_index&quot; on &quot;users&quot; (&quot;name&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>users_report_balance_index</name>
+        <ddl>CREATE INDEX &quot;users_report_balance_index&quot; on &quot;users&quot; (&quot;report_balance&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>users_role_index</name>
+        <ddl>CREATE INDEX &quot;users_role_index&quot; on &quot;users&quot; (&quot;role&quot;)</ddl>
+    </index>
+    <index>
+        <database></database>
+        <name>users_updated_at_index</name>
+        <ddl>CREATE INDEX &quot;users_updated_at_index&quot; on &quot;users&quot; (&quot;updated_at&quot;)</ddl>
+    </index>
+</database>

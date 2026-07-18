@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://cheapvinreport.com</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cheapvinreport.com" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cheapvinreport.com/ru" />
+    <xhtml:link rel="alternate" hreflang="uk" href="https://cheapvinreport.com/uk" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cheapvinreport.com/pl" />
+    <xhtml:link rel="alternate" hreflang="kk" href="https://cheapvinreport.com/kk" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cheapvinreport.com" />
+  </url>
+  <url>
+    <loc>https://cheapvinreport.com/blog</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cheapvinreport.com/blog" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cheapvinreport.com/ru/blog" />
+    <xhtml:link rel="alternate" hreflang="uk" href="https://cheapvinreport.com/uk/blog" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cheapvinreport.com/pl/blog" />
+    <xhtml:link rel="alternate" hreflang="kk" href="https://cheapvinreport.com/kk/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cheapvinreport.com/blog" />
+  </url>
+  <url>
+    <loc>https://cheapvinreport.com/page/terms-and-conditions</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cheapvinreport.com/page/terms-and-conditions" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cheapvinreport.com/ru/page/terms-and-conditions" />
+    <xhtml:link rel="alternate" hreflang="uk" href="https://cheapvinreport.com/uk/page/terms-and-conditions" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cheapvinreport.com/pl/page/terms-and-conditions" />
+    <xhtml:link rel="alternate" hreflang="kk" href="https://cheapvinreport.com/kk/page/terms-and-conditions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cheapvinreport.com/page/terms-and-conditions" />
+  </url>
+  <url>
+    <loc>https://cheapvinreport.com/page/privacy-policy</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cheapvinreport.com/page/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cheapvinreport.com/ru/page/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="uk" href="https://cheapvinreport.com/uk/page/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cheapvinreport.com/pl/page/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="kk" href="https://cheapvinreport.com/kk/page/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cheapvinreport.com/page/privacy-policy" />
+  </url>
+  <url>
+    <loc>https://cheapvinreport.com/page/refund-policy</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cheapvinreport.com/page/refund-policy" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cheapvinreport.com/ru/page/refund-policy" />
+    <xhtml:link rel="alternate" hreflang="uk" href="https://cheapvinreport.com/uk/page/refund-policy" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://cheapvinreport.com/pl/page/refund-policy" />
+    <xhtml:link rel="alternate" hreflang="kk" href="https://cheapvinreport.com/kk/page/refund-policy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cheapvinreport.com/page/refund-policy" />
+  </url>
+</urlset>

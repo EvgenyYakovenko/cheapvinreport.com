@@ -1,0 +1,127 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Canonical: remove /index.php from any URL (/, /index.php/ru, /ru/index.php)
+    RewriteCond %{THE_REQUEST} \s/+index\.php(?:[/?\s]|$) [NC]
+    RewriteRule ^index\.php(?:/(.*))?$ /$1 [R=301,L]
+    RewriteCond %{THE_REQUEST} \s/+(.+)/index\.php(?:[?\s]|$) [NC]
+    RewriteRule ^(.+)/index\.php$ /$1 [R=301,L]
+
+    # One-hop legacy path redirects
+    RewriteRule ^sitemap_index\.xml$ /sitemap.xml [R=301,L,NC]
+    RewriteRule ^sample-report/?$ /images/Example.pdf [R=301,L,NC]
+    RewriteRule ^(kz|ru|uk)/sample-report/?$ /images/Example.pdf [R=301,L,NC]
+    RewriteRule ^kz/refund-policy$ /kk/page/refund-policy [R=301,L,NC]
+    RewriteRule ^kz/privacy-policy$ /kk/page/privacy-policy [R=301,L,NC]
+    RewriteRule ^kz/terms-and-conditions$ /kk/page/terms-and-conditions [R=301,L,NC]
+    RewriteRule ^kz$ /kk [R=301,L,NC]
+    RewriteRule ^kz/(.*)$ /kk/$1 [R=301,L,NC]
+    RewriteRule ^refund-policy$ /page/refund-policy [R=301,L,NC]
+    RewriteRule ^(en|ru|uk|pl|kk)/refund-policy$ /$1/page/refund-policy [R=301,L,NC]
+    RewriteRule ^privacy-policy$ /page/privacy-policy [R=301,L,NC]
+    RewriteRule ^(en|ru|uk|pl|kk)/privacy-policy$ /$1/page/privacy-policy [R=301,L,NC]
+    RewriteRule ^terms-and-conditions$ /page/terms-and-conditions [R=301,L,NC]
+    RewriteRule ^(en|ru|uk|pl|kk)/terms-and-conditions$ /$1/page/terms-and-conditions [R=301,L,NC]
+
+    # /wp-content/* -> /
+    RewriteRule ^wp-content(?:/.*)?$ https://cheapvinreport.com/ [L,R=301,NC]
+    RewriteRule ^wp-admin(?:/.*)?$ https://cheapvinreport.com/ [L,R=301,NC]
+
+    # WWW → non-WWW
+    RewriteCond %{HTTP_HOST} ^www\.cheapvinreport\.com$ [NC]
+    RewriteRule ^(.*)$ https://cheapvinreport.com/$1 [L,R=301]
+
+    RewriteCond %{HTTP_HOST} !^archive\.cheapvinreport\.com$ [NC]
+    RewriteRule ^report/(.+)$ https://archive.cheapvinreport.com/report/$1 [R=301,L]
+
+    # RU
+    RewriteCond %{HTTP_HOST} ^ru\.cheapvinreport\.com$ [NC]
+    RewriteRule ^(.*)$ https://cheapvinreport.com/ru/$1 [R=301,L]
+
+    # UK
+    RewriteCond %{HTTP_HOST} ^uk\.cheapvinreport\.com$ [NC]
+    RewriteRule ^(.*)$ https://cheapvinreport.com/uk/$1 [R=301,L]
+
+    # KZ
+    RewriteCond %{HTTP_HOST} ^kz\.cheapvinreport\.com$ [NC]
+    RewriteRule ^(.*)$ https://cheapvinreport.com/kk/$1 [R=301,L]
+
+
+
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Handle X-XSRF-Token Header
+    RewriteCond %{HTTP:x-xsrf-token} .
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Кэширование статических ресурсов для улучшения производительности
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Изображения
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    # CSS и JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-javascript "access plus 1 month"
+
+    # Шрифты
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType application/font-sfnt "access plus 1 year"
+
+    # Другие ресурсы
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType application/x-shockwave-flash "access plus 1 month"
+</IfModule>
+
+# Заголовки Cache-Control для статических ресурсов
+<IfModule mod_headers.c>
+    # Кэширование изображений на 1 год
+    <FilesMatch "\.(jpg|jpeg|png|gif|svg|webp|ico)$">
+        Header set Cache-Control "max-age=31536000, public, immutable"
+    </FilesMatch>
+
+    # Кэширование CSS и JS на 1 месяц
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </FilesMatch>
+
+    # Кэширование шрифтов на 1 год
+    <FilesMatch "\.(woff|woff2|ttf|otf|eot)$">
+        Header set Cache-Control "max-age=31536000, public, immutable"
+    </FilesMatch>
+
+    # Включаем ETag для валидации кэша
+    FileETag MTime Size
+</IfModule>

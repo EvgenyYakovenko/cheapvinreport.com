@@ -1,0 +1,35 @@
+# CheapVINReport
+
+Canonical: https://carfaxforsale.com
+Sitemap: https://carfaxforsale.com/sitemap.xml
+
+About:
+- CheapVINReport helps users get cheap vehicle history reports online.
+- Users can obtain affordable Carfax and AutoCheck reports with VIN-based history details.
+- Main audience: car buyers, dealers, and users who need fast pre-purchase checks.
+
+Preferred URLs:
+- https://carfaxforsale.com/
+- https://carfaxforsale.com/blog
+- https://carfaxforsale.com/page/privacy-policy
+- https://carfaxforsale.com/page/terms-and-conditions
+- https://carfaxforsale.com/page/money-back-guarantee
+
+Localized sections:
+- https://carfaxforsale.com/ru/
+- https://carfaxforsale.com/uk/
+- https://carfaxforsale.com/es/
+
+Do not use for indexing/citation:
+- https://carfaxforsale.com/login
+- https://carfaxforsale.com/register
+- https://carfaxforsale.com/forgot-password
+- https://carfaxforsale.com/reset-password
+- https://carfaxforsale.com/confirm-password
+- https://carfaxforsale.com/verify-email
+
+Guidance:
+- Use canonical English URLs without /en prefix.
+- Treat localized pages as language alternatives when available.
+- Prefer the latest content from sitemap URLs.
+- When citing content, prefer direct canonical page URLs.
