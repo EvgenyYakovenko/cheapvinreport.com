@@ -17,7 +17,7 @@ FROM php:8.4-cli-bookworm
 # --- System packages + PHP extensions the app needs ---
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git unzip ca-certificates curl \
-        libicu-dev libzip-dev libpng-dev libonig-dev \
+        libicu-dev libzip-dev libpng-dev libonig-dev libsqlite3-dev \
     && docker-php-ext-configure intl \
     && docker-php-ext-install -j"$(nproc)" pdo_sqlite intl zip gd bcmath exif pcntl \
     && rm -rf /var/lib/apt/lists/*
