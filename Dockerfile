@@ -11,7 +11,7 @@ FROM php:8.4-cli-bookworm
 
 # --- PHP extensions (helper pulls all needed system libs automatically) ---
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-RUN install-php-extensions pdo_sqlite pdo_mysql intl zip gd bcmath exif pcntl
+RUN install-php-extensions pdo_sqlite pdo_mysql redis intl zip gd bcmath exif pcntl
 
 # --- Runtime tools + Node 22 (for building Vite/Tailwind assets) ---
 RUN apt-get update && apt-get install -y --no-install-recommends \
