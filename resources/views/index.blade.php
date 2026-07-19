@@ -45,27 +45,23 @@
     <!-- Hero Section -->
     <section class="bg-[#f8f9fa] py-16 lg:py-24">
         <div class="container mx-auto px-4">
-            <div class="max-w-2xl">
+            <div class="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
                 <!-- Left Column: Text and VIN Check Form -->
                 <div>
                     {{-- STAGING: Etsy rating eyebrow (links to real Etsy shop) --}}
                     <a href="https://www.etsy.com/shop/Cheapvinreport/reviews" target="_blank" rel="noopener"
-                       class="inline-flex items-center gap-2 mb-4 text-sm hover:opacity-80 transition">
-                        <span class="text-yellow-400 leading-none">★★★★★</span>
-                        <span class="font-bold text-gray-900">5.0</span>
-                        <span class="text-gray-600">· 32 reviews on Etsy</span>
-                    </a>
-                    <h1 class="text-3xl sm:text-4xl font-extrabold mb-3 text-gray-900 leading-tight">{{ __('index.hero.title') }}</h1>
-                    <h2 class="text-lg text-gray-600 mb-6">{!! str_replace('$3.00', '<strong class="text-primary-600">$3.00</strong>', __('index.hero.subtitle')) !!}</h2>
+                       class="inline-block mb-2 text-sm text-primary-700 hover:opacity-80 transition">★★★★★ 5.0 · 32 reviews on Etsy</a>
+                    <h1 class="text-3xl font-extrabold mb-2 text-gray-900">{{ __('index.hero.title') }}</h1>
+                    <h2 class="text-lg text-gray-600 mb-5">{!! str_replace('$3.00', '<strong class="text-primary-600">$3.00</strong>', __('index.hero.subtitle')) !!}</h2>
 
                     <!-- VIN Check Form -->
                     <form id="vin-checker-form">
-                        <div class="flex flex-col sm:flex-row gap-3 mb-3">
+                        <div class="flex flex-col sm:flex-row gap-2 mb-5 max-w-lg">
                             <input type="text"
-                                   class="flex-1 px-4 py-3 text-lg rounded-lg border-2 border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 text-gray-900 shadow-sm"
+                                   class="flex-1 px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 text-gray-900"
                                    placeholder="{{ __('index.vin_check.placeholder') }}" id="vin" name="vin" required>
                             <button type="submit"
-                                    class="px-6 py-3 text-lg bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition shadow-sm"
+                                    class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition"
                                     id="checkVin">
                                 {{ __('index.vin_check.button') }}
                             </button>
@@ -242,6 +238,10 @@
                     {{--                            {{ __('index.checkout.example_link') }}--}}
                     {{--                        </a>--}}
                     {{--                    </div>--}}
+                </div>
+                <!-- Right Column: report phones (Carfax + AutoCheck style) -->
+                <div class="hidden lg:block">
+                    @include('partials.home-hero-phones')
                 </div>
             </div>
         </div>
