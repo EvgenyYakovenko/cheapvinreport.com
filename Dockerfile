@@ -33,7 +33,8 @@ RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoload
 RUN npm ci && npm run build
 
 # --- Writable dirs for Laravel ---
-RUN chmod -R 775 storage bootstrap/cache
+RUN mkdir -p storage/framework/views storage/framework/cache/data storage/framework/sessions storage/logs bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
