@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Informes Carfax Baratos - $3 | Verificación Instantánea de VIN Carfax USA',
+    'title' => 'Informes Carfax Baratos - $3.00 | Verificación Instantánea de VIN Carfax USA',
     'description' => 'Compre informes Carfax USA baratos en línea por solo $3. Verificación instantánea de VIN, historial de daños y propiedad. El mejor lugar para comprar carfax – carfaxforsale.com',
 
     'nav' => [
@@ -14,7 +14,7 @@ return [
 
     'hero' => [
         'title' => 'Informes de Historial de Vehículos',
-        'subtitle' => 'información sobre accidentes, daños y servicio – $3',
+        'subtitle' => 'información sobre accidentes, daños y servicio – $3.00',
         'price' => '',
     ],
 
@@ -117,7 +117,7 @@ return [
         'transparency_description' => 'los compradores pueden asegurarse de que el historial del automóvil sea transparente y evitar sorpresas desagradables después de la compra, como defectos ocultos o problemas con la documentación.',
         'site_description' => 'Nuestro sitio es un gran lugar para comprar un',
         'link_text' => 'informe VIN',
-        'for_price' => 'barato – por solo $3',
+        'for_price' => 'barato – por solo $3.00',
     ],
 
     'recent_checks' => [
@@ -170,7 +170,7 @@ HTML,
                 'question' => '¿Cómo obtener un informe?',
                 'answer' => <<<'HTML'
 <p>Después de pagar el pedido, recibirá un correo electrónico con el informe y el recibo dentro de 5 a 10 minutos. El informe también estará disponible en el sitio web mediante un enlace generado especialmente.</p>
-<p>En nuestro sitio puede obtener Carfax desde $3 por informe.</p>
+<p>En nuestro sitio puede obtener Carfax desde $3.00 por informe.</p>
 HTML,
             ],
             [

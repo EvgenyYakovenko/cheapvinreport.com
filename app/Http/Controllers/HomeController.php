@@ -78,6 +78,10 @@ class HomeController extends Controller
             $conversionRateToUah = SettingService::convert(1.0, $currency, 'uah');
         }
 
+        // STAGING: homepage social-proof stats (real orders in prod, sample on staging).
+        $purchases24h  = \App\Support\HomepageStats::purchases24h();
+        $recentReports = \App\Support\HomepageStats::recentReports(10);
+
         return view('index', compact(
             'carfaxPrice',
             'autocheckPrice',
@@ -89,6 +93,8 @@ class HomeController extends Controller
             'currency',
             'topupReportBalancePrice',
             'conversionRateToUah',
+            'purchases24h',
+            'recentReports',
         ));
     }
 

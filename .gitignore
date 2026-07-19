@@ -29,3 +29,10 @@ frankenphp-worker.php
 
 # staging env (contains secrets — never commit; paste into Railway Variables instead)
 .env.staging
+
+# local dev env template (contains secrets — never commit)
+env.local.txt
+env.*.txt
+
+# local helper scripts
+*.bat

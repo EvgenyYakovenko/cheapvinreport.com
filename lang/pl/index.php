@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Tanie raporty Carfax - $3 | Natychmiastowa weryfikacja VIN Carfax USA',
+    'title' => 'Tanie raporty Carfax - $3.00 | Natychmiastowa weryfikacja VIN Carfax USA',
     'description' => 'Kup tanie raporty Carfax USA online za jedyne $3. Natychmiastowa weryfikacja VIN, historia uszkodzeń i własności. Najlepsze miejsce do zakupu carfax – cheapvinreport.com',
 
     'nav' => [
@@ -14,7 +14,7 @@ return [
 
     'hero' => [
         'title' => 'Raporty Historii Pojazdu',
-        'subtitle' => 'informacje o wypadkach, uszkodzeniach i serwisie – $3',
+        'subtitle' => 'informacje o wypadkach, uszkodzeniach i serwisie – $3.00',
         'price' => '',
     ],
 
@@ -117,7 +117,7 @@ return [
         'transparency_description' => 'kupujący mogą upewnić się, że historia samochodu jest przejrzysta i uniknąć nieprzyjemnych niespodzianek po zakupie, takich jak ukryte wady lub problemy z dokumentacją.',
         'site_description' => 'Nasza strona to świetne miejsce do zakupu taniego',
         'link_text' => 'raportu VIN',
-        'for_price' => '– za jedyne $3',
+        'for_price' => '– za jedyne $3.00',
     ],
 
     'recent_checks' => [

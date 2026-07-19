@@ -45,11 +45,18 @@
     <!-- Hero Section -->
     <section class="bg-[#f8f9fa] py-16 lg:py-24">
         <div class="container mx-auto px-4">
-            <div class="grid lg:grid-cols-2 gap-12 items-start max-w-7xl mx-auto">
+            <div class="max-w-2xl">
                 <!-- Left Column: Text and VIN Check Form -->
                 <div>
-                    <h1 class="text-3xl font-bold mb-4 text-gray-900">{{ __('index.hero.title') }}</h1>
-                    <h2 class="text-xl lg:text-2xl text-gray-700 mb-8">{!! str_replace('$3', '<strong class="text-primary-600">$3</strong>', __('index.hero.subtitle')) !!}</h2>
+                    {{-- STAGING: Etsy rating eyebrow (links to real Etsy shop) --}}
+                    <a href="https://www.etsy.com/shop/Cheapvinreport/reviews" target="_blank" rel="noopener"
+                       class="inline-flex items-center gap-2 mb-4 text-sm hover:opacity-80 transition">
+                        <span class="text-yellow-400 leading-none">★★★★★</span>
+                        <span class="font-bold text-gray-900">5.0</span>
+                        <span class="text-gray-600">· 32 reviews on Etsy</span>
+                    </a>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold mb-3 text-gray-900 leading-tight">{{ __('index.hero.title') }}</h1>
+                    <h2 class="text-lg text-gray-600 mb-6">{!! str_replace('$3.00', '<strong class="text-primary-600">$3.00</strong>', __('index.hero.subtitle')) !!}</h2>
 
                     <!-- VIN Check Form -->
                     <form id="vin-checker-form">
@@ -92,6 +99,8 @@
 
                         <div id="data-report" class="pt-2"></div>
                     </form>
+
+                    @include('partials.home-trust-badges')
 
                     <!-- Checkout Form (hidden by default) -->
                     <div class="bg-white rounded-lg p-6 mt-4 border-2 border-gray-300" id="checkout-form">
@@ -234,20 +243,6 @@
                     {{--                        </a>--}}
                     {{--                    </div>--}}
                 </div>
-
-                <!-- Right Column: Image -->
-                <div class="flex justify-center items-start sticky top-4">
-                    <div class="w-full max-w-lg">
-                        <img
-                            src="{{ asset('images/car3.png') }}"
-                            alt="VIN Check Illustration"
-                            class="w-full h-auto max-h-[300px] object-contain"
-                            loading="eager"
-                            fetchpriority="high"
-                            decoding="async"
-                        >
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -321,6 +316,13 @@
     </section>
 
     <!-- Report Balance Purchase Plans Section -->
+    {{-- STAGING: customer reviews (6) — full list on /reviews --}}
+    @include('partials.home-how-it-works')
+    @include('partials.home-sample-report')
+    @include('partials.home-price-compare')
+
+    @include('partials.reviews', ['limit' => 6])
+
     <section id="bundles" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="max-w-7xl mx-auto">
@@ -1357,4 +1359,9 @@
         initializeBundlePrices();
     });
 </script>
+    @include('partials.home-trust')
+    @include('partials.home-tools')
+    @include('partials.home-recent-reports')
+    @include('partials.home-disclaimer')
+
 @include('footer')

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Cheap Carfax $3 – USA VIN Report in Seconds | cheapvinreport.com',
+    'title' => 'Cheap Carfax $3.00 – USA VIN Report in Seconds | cheapvinreport.com',
     'description' => 'CheapVinReport provides a discounted Carfax report with a complete history of a particular car, painted on paper. It contains all the information that the buyer should know before making a deal. Information can be found on absolutely any car in America.',
 
     'nav' => [
@@ -14,7 +14,7 @@ return [
 
     'hero' => [
         'title' => 'Cheap Carfax Reports',
-        'subtitle' => 'VIN History & USA VIN Code Check – $3',
+        'subtitle' => 'VIN History & USA VIN Code Check – $3.00',
         'price' => '',
     ],
 
@@ -117,7 +117,7 @@ return [
         'transparency_description' => 'buyers can ensure that the history of the car is transparent and avoid unpleasant surprises after the purchase, such as hidden defects or paperwork issues.',
         'site_description' => 'Our site is a great place to buy a cheap',
         'link_text' => 'VIN report',
-        'for_price' => '– for just $3',
+        'for_price' => '– for just $3.00',
     ],
 
     'recent_checks' => [
@@ -170,7 +170,7 @@ HTML,
                 'question' => 'How to get a report?',
                 'answer' => <<<'HTML'
 <p>After paying for the order, you will receive an email with a report and a payment receipt within 5 to 10 minutes. The report will also be available on the website via a specially generated link.</p>
-<p>On our website you can get Carfax discounts down to $3 per report.</p>
+<p>On our website you can get Carfax discounts down to $3.00 per report.</p>
 HTML,
             ],
             [

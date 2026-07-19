@@ -13,6 +13,11 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\StaticPageController;
+use App\Http\Controllers\ComparisonController;
+use App\Http\Controllers\VinCheckController;
+use App\Http\Controllers\ToolController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -24,9 +29,19 @@ $supportedLocales = array_keys(LaravelLocalization::getSupportedLocales());
 Route::middleware(['setLocaleFromUrl'])->group(function () use ($supportedLocales) {
     Route::get('/', [HomeController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('index');
     Route::get('/author', [HomeController::class, 'author'])->middleware('cache.headers:max_age=3600;public')->name('author');
+    Route::get('/reviews', [ReviewController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('reviews');
+    Route::get('/money-back-guarantee', [StaticPageController::class, 'moneyBack'])->middleware('cache.headers:max_age=3600;public')->name('money-back');
+    Route::get('/compare', [ComparisonController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('compare.index');
+    Route::get('/compare/{competitor}', [ComparisonController::class, 'show'])->middleware('cache.headers:max_age=3600;public')->name('compare.show');
+    Route::get('/vin-check', [VinCheckController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('vincheck.index');
+    Route::get('/vin-check/{check}', [VinCheckController::class, 'show'])->middleware('cache.headers:max_age=3600;public')->name('vincheck.show');
     Route::get('/blog', [BlogController::class, 'blog'])->middleware('cache.headers:max_age=3600;public')->name('blog');
     Route::get('/blog/{slug}', [HomeController::class, 'post'])->middleware('cache.headers:max_age=3600;public')->name('post');
     Route::get('/page/{slug}', [HomeController::class, 'page'])->middleware('cache.headers:max_age=3600;public')->name('page');
+    Route::get('/tools', [ToolController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('tools.index');
+    Route::get('/tools/{tool}', [ToolController::class, 'show'])->middleware('cache.headers:max_age=3600;public')->name('tools.show');
+    Route::get('/tools/api/decode-vin', [ToolController::class, 'decodeVin'])->name('tools.decode-vin');
+    Route::get('/tools/api/recalls', [ToolController::class, 'recallsByVin'])->name('tools.recalls');
     Route::get('/thank-you', [HomeController::class, 'thankYou'])->name('thank-you')
         ->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
     Route::post('/thank-you', [HomeController::class, 'thankYouPost'])->name('thank-you.post')
@@ -35,9 +50,17 @@ Route::middleware(['setLocaleFromUrl'])->group(function () use ($supportedLocale
     Route::prefix('{locale}')->whereIn('locale', $supportedLocales)->group(function () {
         Route::get('/', [HomeController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('index.locale');
         Route::get('/author', [HomeController::class, 'author'])->middleware('cache.headers:max_age=3600;public')->name('author.locale');
+        Route::get('/reviews', [ReviewController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('reviews.locale');
+        Route::get('/money-back-guarantee', [StaticPageController::class, 'moneyBack'])->middleware('cache.headers:max_age=3600;public')->name('money-back.locale');
+        Route::get('/compare', [ComparisonController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('compare.index.locale');
+        Route::get('/compare/{competitor}', [ComparisonController::class, 'show'])->middleware('cache.headers:max_age=3600;public')->name('compare.show.locale');
+        Route::get('/vin-check', [VinCheckController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('vincheck.index.locale');
+        Route::get('/vin-check/{check}', [VinCheckController::class, 'show'])->middleware('cache.headers:max_age=3600;public')->name('vincheck.show.locale');
         Route::get('/blog', [BlogController::class, 'blog'])->middleware('cache.headers:max_age=3600;public')->name('blog.locale');
         Route::get('/blog/{slug}', [HomeController::class, 'post'])->middleware('cache.headers:max_age=3600;public')->name('post.locale');
         Route::get('/page/{slug}', [HomeController::class, 'page'])->middleware('cache.headers:max_age=3600;public')->name('page.locale');
+        Route::get('/tools', [ToolController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('tools.index.locale');
+        Route::get('/tools/{tool}', [ToolController::class, 'show'])->middleware('cache.headers:max_age=3600;public')->name('tools.show.locale');
         Route::get('/thank-you', [HomeController::class, 'thankYou'])->name('thank-you.locale')
             ->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
         Route::post('/thank-you', [HomeController::class, 'thankYouPost'])->name('thank-you.post.locale')
