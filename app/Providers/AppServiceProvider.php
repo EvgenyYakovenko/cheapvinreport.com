@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
                    str_contains(request()->getHost(), '127.0.0.1');
 
         // Принудительно использовать HTTPS только в продакшене
-        if ($isProduction && ! $isLocal) {
+        if (! $isLocal && app()->environment('production', 'staging')) { // STAGING: also force HTTPS behind Railway proxy (fixes mixed-content CSS)
             URL::forceScheme('https');
             // same_site='none' требуется для cross-site запросов, secure=true обязателен для same_site='none'
             Config::set('session.secure', true);
