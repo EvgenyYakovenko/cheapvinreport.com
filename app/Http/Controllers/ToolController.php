@@ -88,20 +88,23 @@ class ToolController extends Controller
     {
         return view('tools.index', [
             'tools'           => self::TOOLS,
-            'metaTitle'       => 'Free Vehicle & VIN Tools',
-            'metaDescription' => 'Free VIN and car tools: VIN decoder, recall check, VIN validator, auto-loan and fuel calculators. No sign-up.',
+            'metaTitle'       => __('tools.hub.meta_title'),
+            'metaDescription' => __('tools.hub.meta_desc'),
         ]);
     }
 
     public function show(string $tool): View
     {
+        // STAGING: локализованный роут /{locale}/... передаёт {locale} первым позиционным
+        // параметром, поэтому берём нужный параметр по имени из роута (работает и для /en, и для локалей).
+        $tool = request()->route('tool');
         abort_unless(isset(self::TOOLS[$tool]), 404);
 
         $config = self::TOOLS[$tool];
 
         return view($config['view'], [
-            'metaTitle'       => $config['title'],
-            'metaDescription' => $config['description'],
+            'metaTitle'       => __("tools.items.$tool.title"),
+            'metaDescription' => __("tools.items.$tool.description"),
             'toolSlug'        => $tool,
         ]);
     }

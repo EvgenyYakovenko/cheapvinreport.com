@@ -12,20 +12,31 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                // Demo 1 palette: near-black "ink" as primary, warm orange accent.
                 primary: {
-                    50: '#eef7f8',
-                    100: '#d7ebef',
-                    200: '#b4d8df',
-                    300: '#88bfca',
-                    400: '#559fb0',
-                    500: '#2a7d91',
-                    600: '#073b4c',
-                    700: '#052e3c',
-                    800: '#041f28',
-                    900: '#010506',
+                    50: '#f5f6f7',
+                    100: '#e9ebee',
+                    200: '#d3d7dd',
+                    300: '#aab2bd',
+                    400: '#6b7480',
+                    500: '#3d434c',
+                    600: '#141518',
+                    700: '#0d0e10',
+                    800: '#080809',
+                    900: '#030304',
+                },
+                acc: {
+                    50: '#fff3ee',
+                    100: '#ffe1d5',
+                    200: '#ffc3aa',
+                    300: '#ff9d76',
+                    400: '#ff7847',
+                    500: '#ff5a1f',
+                    600: '#e6480f',
+                    700: '#bd3a0d',
                 },
             },
         },

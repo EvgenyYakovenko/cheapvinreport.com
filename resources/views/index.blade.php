@@ -43,26 +43,26 @@
 <script type="application/ld+json">{!! json_encode($productSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
 <main>
     <!-- Hero Section -->
-    <style>@media (min-width:1024px){.hero-grid{grid-template-columns:3fr 2fr}}</style>
-    <section class="bg-[#f8f9fa] py-16 lg:py-24">
+    <style>@media (min-width:1024px){.hero-grid{grid-template-columns:1.35fr 1fr}}</style>
+    <section class="bg-white py-14 lg:py-20 border-b border-gray-900/10">
         <div class="container mx-auto px-4">
-            <div class="hero-grid grid gap-12 items-start max-w-7xl mx-auto">
+            <div class="hero-grid grid gap-10 items-stretch max-w-7xl mx-auto">
                 <!-- Left Column: Text and VIN Check Form -->
                 <div>
                     {{-- STAGING: Etsy rating eyebrow (links to real Etsy shop) --}}
                     <a href="https://www.etsy.com/shop/Cheapvinreport/reviews" target="_blank" rel="noopener"
-                       class="inline-block mb-2 text-sm text-primary-700 hover:opacity-80 transition">★★★★★ 5.0 · 32 reviews on Etsy</a>
-                    <h1 class="text-3xl font-extrabold mb-2 text-gray-900">{{ __('index.hero.title') }}</h1>
-                    <h2 class="text-lg text-gray-600 mb-5">{!! str_replace('$3.00', '<strong class="text-primary-600">$3.00</strong>', __('index.hero.subtitle')) !!}</h2>
+                       class="inline-flex items-center gap-2 mb-5 text-[13px] font-semibold text-gray-700 hover:opacity-80 transition"><span class="text-acc-500 tracking-tight">★★★★★</span> <span class="text-gray-900">5.0</span> <span class="text-gray-300">|</span> 32 verified reviews on Etsy</a>
+                    <h1 class="text-4xl lg:text-5xl leading-[1.05] font-extrabold tracking-tight mb-4 text-gray-900">{{ __('index.hero.title') }}</h1>
+                    <h2 class="text-lg text-gray-500 mb-7 max-w-md">{!! str_replace('$3.00', '<strong class="text-acc-500 font-bold">$3.00</strong>', __('index.hero.subtitle')) !!}</h2>
 
                     <!-- VIN Check Form -->
                     <form id="vin-checker-form">
-                        <div class="flex flex-col sm:flex-row gap-2 mb-5">
+                        <div class="flex flex-col sm:flex-row gap-0 mb-4 max-w-md border-2 border-gray-900 rounded-md overflow-hidden focus-within:ring-2 focus-within:ring-acc-500">
                             <input type="text"
-                                   class="flex-1 px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 text-gray-900"
+                                   class="flex-1 px-4 py-3.5 outline-none text-[15px] font-medium text-gray-900 border-0 focus:ring-0"
                                    placeholder="{{ __('index.vin_check.placeholder') }}" id="vin" name="vin" required>
                             <button type="submit"
-                                    class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition"
+                                    class="px-6 py-3.5 bg-gray-900 hover:bg-acc-500 text-white font-bold transition"
                                     id="checkVin">
                                 {{ __('index.vin_check.button') }}
                             </button>
@@ -240,9 +240,20 @@
                     {{--                        </a>--}}
                     {{--                    </div>--}}
                 </div>
-                <!-- Right Column: customer quote -->
-                <div class="hidden lg:block">
-                    @include('partials.home-hero-quote')
+                <!-- Right Column: price rail (Demo 1) -->
+                <div class="hidden lg:flex bg-gray-900 text-white rounded-md p-8 flex-col justify-center">
+                    <div class="text-[11px] uppercase tracking-[.22em] text-gray-400 mb-5">{{ __('home.rail.heading') }}</div>
+                    <div class="space-y-3.5 text-[15px]">
+                        <div class="flex items-center justify-between"><span class="text-gray-300">Carfax</span><span class="font-bold line-through text-gray-500">$44.99</span></div>
+                        <div class="flex items-center justify-between"><span class="text-gray-300">AutoCheck</span><span class="font-bold line-through text-gray-500">$24.99</span></div>
+                        <div class="flex items-center justify-between"><span class="text-gray-300">EpicVIN</span><span class="font-bold line-through text-gray-500">$19.99</span></div>
+                        <div class="flex items-center justify-between border-t border-white/10 pt-3.5"><span class="font-bold text-acc-500">cheapvinreport.com</span><span class="text-3xl font-extrabold text-acc-500">$3.00</span></div>
+                    </div>
+                    @if($purchases24h ?? null)
+                    <div class="mt-7 inline-flex items-center gap-2 text-[13px] text-gray-300">
+                        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> {{ number_format($purchases24h) }} {{ __('home.rail.counter') }}
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -360,10 +371,10 @@
                     </div>
 
                     <!-- Most Popular (25 Reports) -->
-                    <div class="bg-white rounded-lg border-2 border-primary-500 shadow-lg relative">
+                    <div class="bg-white rounded-lg border-2 border-acc-500 shadow-lg relative">
                         <div class="absolute top-0 left-0 w-full flex justify-center -translate-y-1/2 px-4">
                             <span
-                                class="bg-primary-600 text-white px-4 py-1 rounded-full text-sm font-semibold text-center leading-tight whitespace-normal max-w-[90%]">⭐️ {{ __('index.bundles.most_popular') }}</span>
+                                class="bg-acc-500 text-white px-4 py-1 rounded-full text-sm font-semibold text-center leading-tight whitespace-normal max-w-[90%]">⭐️ {{ __('index.bundles.most_popular') }}</span>
                         </div>
                         <div class="p-6 pt-10">
                             <h3 class="text-xl font-bold text-gray-900 mb-2 text-center">{{ __('index.bundles.most_popular') }}</h3>

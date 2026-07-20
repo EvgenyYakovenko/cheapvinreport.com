@@ -31,6 +31,11 @@ Route::middleware(['setLocaleFromUrl'])->group(function () use ($supportedLocale
     Route::get('/author', [HomeController::class, 'author'])->middleware('cache.headers:max_age=3600;public')->name('author');
     Route::get('/reviews', [ReviewController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('reviews');
     Route::get('/money-back-guarantee', [StaticPageController::class, 'moneyBack'])->middleware('cache.headers:max_age=3600;public')->name('money-back');
+    Route::get('/data-sources', [StaticPageController::class, 'dataSources'])->middleware('cache.headers:max_age=3600;public')->name('data-sources');
+    Route::get('/terms-and-conditions', [StaticPageController::class, 'terms'])->middleware('cache.headers:max_age=3600;public')->name('terms');
+    Route::get('/privacy-policy', [StaticPageController::class, 'privacy'])->middleware('cache.headers:max_age=3600;public')->name('privacy');
+    Route::get('/refund-policy', [StaticPageController::class, 'refund'])->middleware('cache.headers:max_age=3600;public')->name('refund');
+    Route::get('/cookie-policy', [StaticPageController::class, 'cookies'])->middleware('cache.headers:max_age=3600;public')->name('cookies');
     Route::get('/compare', [ComparisonController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('compare.index');
     Route::get('/compare/{competitor}', [ComparisonController::class, 'show'])->middleware('cache.headers:max_age=3600;public')->name('compare.show');
     Route::get('/vin-check', [VinCheckController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('vincheck.index');
@@ -52,6 +57,11 @@ Route::middleware(['setLocaleFromUrl'])->group(function () use ($supportedLocale
         Route::get('/author', [HomeController::class, 'author'])->middleware('cache.headers:max_age=3600;public')->name('author.locale');
         Route::get('/reviews', [ReviewController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('reviews.locale');
         Route::get('/money-back-guarantee', [StaticPageController::class, 'moneyBack'])->middleware('cache.headers:max_age=3600;public')->name('money-back.locale');
+        Route::get('/data-sources', [StaticPageController::class, 'dataSources'])->middleware('cache.headers:max_age=3600;public')->name('data-sources.locale');
+        Route::get('/terms-and-conditions', [StaticPageController::class, 'terms'])->middleware('cache.headers:max_age=3600;public')->name('terms.locale');
+        Route::get('/privacy-policy', [StaticPageController::class, 'privacy'])->middleware('cache.headers:max_age=3600;public')->name('privacy.locale');
+        Route::get('/refund-policy', [StaticPageController::class, 'refund'])->middleware('cache.headers:max_age=3600;public')->name('refund.locale');
+        Route::get('/cookie-policy', [StaticPageController::class, 'cookies'])->middleware('cache.headers:max_age=3600;public')->name('cookies.locale');
         Route::get('/compare', [ComparisonController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('compare.index.locale');
         Route::get('/compare/{competitor}', [ComparisonController::class, 'show'])->middleware('cache.headers:max_age=3600;public')->name('compare.show.locale');
         Route::get('/vin-check', [VinCheckController::class, 'index'])->middleware('cache.headers:max_age=3600;public')->name('vincheck.index.locale');

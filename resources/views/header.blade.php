@@ -10,6 +10,9 @@
     <link rel="icon" type="image/png" sizes="48x48" href="{{ asset('images/favicon/favicon-48x48.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon/apple-touch-icon.png') }}">
 
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800,900&display=swap" rel="stylesheet" />
+
     {{-- STAGING: also emit noindex meta on the 'staging' env (in addition to the
          X-Robots-Tag header added globally by ForceNoIndex middleware). Prod is
          excluded, so this stays safe when merged into the main repo. --}}
@@ -246,6 +249,7 @@
     <!-- End of Taboola Pixel Code -->
 </head>
 <body>
+<div class="h-1 bg-acc-500"></div>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TSC9JLWP"
                   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

@@ -1,23 +1,24 @@
-{{-- STAGING: How it works — 3 steps. --}}
-<section class="py-14 bg-white border-t border-gray-100">
+{{-- STAGING: How it works — 3 steps (Demo 1 style). i18n via lang/home. --}}
+<section class="py-16 bg-white border-t border-gray-900/10">
     <div class="container mx-auto px-4">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-center text-3xl lg:text-4xl font-bold text-gray-900 mb-10">How it works</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="text-center">
-                    <div class="mx-auto mb-4 w-12 h-12 rounded-full bg-primary-600 text-white flex items-center justify-center text-xl font-bold">1</div>
-                    <h3 class="font-bold text-gray-900 mb-1">Enter the VIN</h3>
-                    <p class="text-gray-600 text-sm">Type the 17-character VIN of the car you want to check.</p>
+            <h2 class="text-[13px] uppercase tracking-[.2em] text-acc-600 font-bold mb-2">{{ __('home.how.eyebrow') }}</h2>
+            <p class="text-2xl lg:text-3xl font-extrabold tracking-tight text-gray-900 mb-10">{{ __('home.how.title') }}</p>
+            <div class="grid md:grid-cols-3 gap-px bg-gray-900/10 border border-gray-900/10 rounded-lg overflow-hidden">
+                <div class="bg-white p-7">
+                    <div class="text-acc-500 font-black text-2xl mb-3">01</div>
+                    <div class="font-bold text-gray-900 mb-1.5">{{ __('home.how.s1_t') }}</div>
+                    <p class="text-[14px] text-gray-500">{{ __('home.how.s1_d') }}</p>
                 </div>
-                <div class="text-center">
-                    <div class="mx-auto mb-4 w-12 h-12 rounded-full bg-primary-600 text-white flex items-center justify-center text-xl font-bold">2</div>
-                    <h3 class="font-bold text-gray-900 mb-1">Pay securely from $3.00</h3>
-                    <p class="text-gray-600 text-sm">Checkout is encrypted. Cards and other secure methods accepted.</p>
+                <div class="bg-white p-7">
+                    <div class="text-acc-500 font-black text-2xl mb-3">02</div>
+                    <div class="font-bold text-gray-900 mb-1.5">{{ __('home.how.s2_t') }}</div>
+                    <p class="text-[14px] text-gray-500">{{ __('home.how.s2_d') }}</p>
                 </div>
-                <div class="text-center">
-                    <div class="mx-auto mb-4 w-12 h-12 rounded-full bg-primary-600 text-white flex items-center justify-center text-xl font-bold">3</div>
-                    <h3 class="font-bold text-gray-900 mb-1">Get your report in minutes</h3>
-                    <p class="text-gray-600 text-sm">Delivered as a download — accidents, title, odometer and owners.</p>
+                <div class="bg-white p-7">
+                    <div class="text-acc-500 font-black text-2xl mb-3">03</div>
+                    <div class="font-bold text-gray-900 mb-1.5">{{ __('home.how.s3_t') }}</div>
+                    <p class="text-[14px] text-gray-500">{{ __('home.how.s3_d') }}</p>
                 </div>
             </div>
         </div>

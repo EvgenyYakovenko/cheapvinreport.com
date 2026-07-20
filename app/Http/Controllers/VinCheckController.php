@@ -77,20 +77,24 @@ class VinCheckController extends Controller
     {
         return view('vin-checks.index', [
             'checks'          => self::CHECKS,
-            'metaTitle'       => 'VIN Check Services',
-            'metaDescription' => 'Check a car by VIN — accident, title, odometer, owner, service, auction and theft records from the full Carfax and AutoCheck report.',
+            'metaTitle'       => __('vincheck.hub.meta_title'),
+            'metaDescription' => __('vincheck.hub.meta_desc'),
         ]);
     }
 
     public function show(string $check): View
     {
+        // STAGING: локализованный роут /{locale}/... передаёт {locale} первым позиционным
+        // параметром, поэтому берём нужный параметр по имени из роута (работает и для /en, и для локалей).
+        $check = request()->route('check');
         abort_unless(isset(self::CHECKS[$check]), 404);
         $data = self::CHECKS[$check];
 
         return view('vin-checks.show', [
             'check'           => $data,
-            'metaTitle'       => $data['metaTitle'],
-            'metaDescription' => $data['metaDescription'],
+            'slug'            => $check,
+            'metaTitle'       => __("vincheck.checks.$check.meta_title"),
+            'metaDescription' => __("vincheck.checks.$check.meta_desc"),
         ]);
     }
 }

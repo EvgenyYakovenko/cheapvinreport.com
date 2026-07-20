@@ -107,22 +107,25 @@ class ComparisonController extends Controller
     {
         return view('comparisons.index', [
             'items'           => self::ITEMS,
-            'metaTitle'       => 'Compare — Best Cheap Carfax Alternatives',
-            'metaDescription' => 'How cheapvinreport.com compares to Carfax, AutoCheck, EpicVIN, Bumper, ClearVIN, carVertical and other cheap Carfax alternatives.',
+            'metaTitle'       => __('compare.hub.meta_title'),
+            'metaDescription' => __('compare.hub.meta_desc'),
         ]);
     }
 
     public function show(string $competitor): View
     {
+        // STAGING: локализованный роут /{locale}/... передаёт {locale} первым позиционным
+        // параметром, поэтому берём нужный параметр по имени из роута (работает и для /en, и для локалей).
+        $competitor = request()->route('competitor');
         abort_unless(isset(self::ITEMS[$competitor]), 404);
         $item = self::ITEMS[$competitor];
 
         return view('comparisons.show', [
             'item'            => $item,
-            'rows'            => $this->rows($item),
+            'slug'            => $competitor,
             'our'             => self::OUR,
-            'metaTitle'       => $item['metaTitle'],
-            'metaDescription' => $item['metaDescription'],
+            'metaTitle'       => __("compare.items.$competitor.meta_title"),
+            'metaDescription' => __("compare.items.$competitor.meta_desc"),
         ]);
     }
 }
