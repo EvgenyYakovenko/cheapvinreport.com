@@ -43,9 +43,10 @@
 <script type="application/ld+json">{!! json_encode($productSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
 <main>
     <!-- Hero Section -->
+    <style>@media (min-width:1024px){.hero-grid{grid-template-columns:3fr 2fr}}</style>
     <section class="bg-[#f8f9fa] py-16 lg:py-24">
         <div class="container mx-auto px-4">
-            <div class="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+            <div class="hero-grid grid gap-12 items-start max-w-7xl mx-auto">
                 <!-- Left Column: Text and VIN Check Form -->
                 <div>
                     {{-- STAGING: Etsy rating eyebrow (links to real Etsy shop) --}}
@@ -56,7 +57,7 @@
 
                     <!-- VIN Check Form -->
                     <form id="vin-checker-form">
-                        <div class="flex flex-col sm:flex-row gap-2 mb-5 max-w-lg">
+                        <div class="flex flex-col sm:flex-row gap-2 mb-5">
                             <input type="text"
                                    class="flex-1 px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 text-gray-900"
                                    placeholder="{{ __('index.vin_check.placeholder') }}" id="vin" name="vin" required>
@@ -239,9 +240,9 @@
                     {{--                        </a>--}}
                     {{--                    </div>--}}
                 </div>
-                <!-- Right Column: report phones (Carfax + AutoCheck style) -->
+                <!-- Right Column: customer quote -->
                 <div class="hidden lg:block">
-                    @include('partials.home-hero-phones')
+                    @include('partials.home-hero-quote')
                 </div>
             </div>
         </div>
